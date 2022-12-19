@@ -14,7 +14,7 @@ This subflow sends _RESTful API_ requests to the device.
 This subflow actually uses __Sonoff1__ to retrieve the device info from the device.
 
 ## Flows:
-### MiniR2
+### MiniR2 DIY Mode
 For talking to the [Sonoff MiniR2](https://itead.cc/product/sonoff-mini/) DIY Switch.
-### MiniR3
+### MiniR3 DIY Mode
 For talking to the [Sonoff MiniR3](https://itead.cc/product/sonoff-minir3-smart-switch/) DIY Switch. (Which is mostly unrelated to the MiniR2 DIY Switch... :confounded: )
