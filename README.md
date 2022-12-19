@@ -18,3 +18,15 @@ This subflow actually uses __Sonoff1__ to retrieve the device info from the devi
 For talking to the [Sonoff MiniR2](https://itead.cc/product/sonoff-mini/) DIY Switch.
 ### MiniR3 DIY Mode
 For talking to the [Sonoff MiniR3](https://itead.cc/product/sonoff-minir3-smart-switch/) DIY Switch. (Which is mostly unrelated to the MiniR2 DIY Switch... :confounded: )
+### BasicR3 DIY Mode
+(future item)
+Should be same as MiniR2
+### RFR3 DIY Mode
+(future item)
+Should be same as MiniR2
+### D1 DIY Mode
+(future item)
+### B05-BL DIY Mode
+(future item)
+### SPM-Main DIY Mode
+(future item)
