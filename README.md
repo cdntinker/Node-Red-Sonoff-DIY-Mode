@@ -15,6 +15,6 @@ This subflow actually uses __Sonoff1__ to retrieve the device info from the devi
 
 ## Flows:
 ### MiniR2
-For talking to the Sonoff MiniR2 DIY Switch.
+For talking to the [Sonoff MiniR2](https://itead.cc/product/sonoff-mini/) DIY Switch.
 ### MiniR3
-For talking to the Sonoff MiniR3 DIY Switch. (Which is mostly unrelated to the MiniR2 DIY Switch... :confounded: )
+For talking to the [Sonoff MiniR3](https://itead.cc/product/sonoff-minir3-smart-switch/) DIY Switch. (Which is mostly unrelated to the MiniR2 DIY Switch... :confounded: )
