@@ -1,5 +1,5 @@
 # Node-Red-Sonoff-DIY-Mode
-Node-Red flows for manipulating Sonoff Devices via their _RESTful API_ in __DIY Mode__.
+Node-Red flows for manipulating Sonoff Devices via their [_RESTful API_](https://sonoff.tech/diy-developer/#7) in __DIY Mode__.
 
 Well...
 
@@ -17,4 +17,4 @@ This subflow actually uses __Sonoff1__ to retrieve the device info from the devi
 ### MiniR2
 For talking to the Sonoff MiniR2 DIY Switch.
 ### MiniR3
-For talking to the Sonoff MiniR3 DIY Switch. (Which is mostly unrelated to the MiniR2 DIY Switch... :| )
+For talking to the Sonoff MiniR3 DIY Switch. (Which is mostly unrelated to the MiniR2 DIY Switch... :confounded: )
