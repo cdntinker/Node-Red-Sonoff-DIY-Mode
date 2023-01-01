@@ -1,300 +1,268 @@
 [
     {
-        "id": "ccab8793870fae40",
-        "type": "subflow",
-        "name": "Sonoff2",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 60,
-                "y": 100,
-                "wires": [
-                    {
-                        "id": "09ea1e6b51ccc346"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 460,
-                "y": 80,
-                "wires": [
-                    {
-                        "id": "05cf6b923ffc42e8",
-                        "port": 0
-                    }
-                ]
-            },
-            {
-                "x": 460,
-                "y": 120,
-                "wires": [
-                    {
-                        "id": "05cf6b923ffc42e8",
-                        "port": 1
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99"
-    },
-    {
-        "id": "05cf6b923ffc42e8",
-        "type": "subflow:f92a0611f953efce",
-        "z": "ccab8793870fae40",
-        "name": "",
-        "x": 340,
-        "y": 100,
-        "wires": [
-            [],
-            []
-        ]
-    },
-    {
-        "id": "09ea1e6b51ccc346",
-        "type": "change",
-        "z": "ccab8793870fae40",
-        "name": "Status",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "{}",
-                "tot": "json"
-            },
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "info",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 190,
-        "y": 100,
-        "wires": [
-            [
-                "05cf6b923ffc42e8"
-            ]
-        ]
-    },
-    {
-        "id": "f92a0611f953efce",
-        "type": "subflow",
-        "name": "Sonoff1",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 60,
-                "y": 80,
-                "wires": [
-                    {
-                        "id": "c0becc4593cc906a"
-                    }
-                ]
-            }
-        ],
-        "out": [
-            {
-                "x": 920,
-                "y": 80,
-                "wires": [
-                    {
-                        "id": "d940b9cb3c569ab2",
-                        "port": 0
-                    }
-                ]
-            },
-            {
-                "x": 580,
-                "y": 180,
-                "wires": [
-                    {
-                        "id": "c0becc4593cc906a",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99"
-    },
-    {
-        "id": "c0becc4593cc906a",
-        "type": "function",
-        "z": "f92a0611f953efce",
-        "name": "function 15",
-        "func": "\nmsg.url = \"http://\" + msg.Device.sonoffIP + \":8081/zeroconf/\" + msg.topic;\n\nmsg.payload = {\n    \"deviceid\": msg.Device.sonoffID,\n    \"data\": msg.payload\n    };\n    \nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 410,
-        "y": 80,
-        "wires": [
-            [
-                "d940b9cb3c569ab2"
-            ]
-        ]
-    },
-    {
-        "id": "d940b9cb3c569ab2",
-        "type": "http request",
-        "z": "f92a0611f953efce",
-        "name": "",
-        "method": "POST",
-        "ret": "obj",
-        "paytoqs": "ignore",
-        "url": "",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 590,
-        "y": 80,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "e94c6cf641652ce9",
+        "id": "9af5bfd06b294546",
         "type": "tab",
-        "label": "MiniR3 DIY Mode",
+        "label": "DIY Mode MiniR3",
         "disabled": false,
         "info": "",
         "env": []
     },
     {
-        "id": "94080c0c5dabb50b",
-        "type": "junction",
-        "z": "e94c6cf641652ce9",
-        "x": 1820,
-        "y": 360,
+        "id": "7b2feea52958eb88",
+        "type": "mqtt in",
+        "z": "9af5bfd06b294546",
+        "name": "",
+        "topic": "Sonoff_DIY/stat",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b8f3330d4af5f7f3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 100,
+        "y": 40,
         "wires": [
             [
-                "542d109abe488443"
+                "1b5c0710c5e7c103"
             ]
         ]
     },
     {
-        "id": "c8745bb0f250adde",
-        "type": "junction",
-        "z": "e94c6cf641652ce9",
-        "x": 1700,
-        "y": 720,
+        "id": "1b5c0710c5e7c103",
+        "type": "debug",
+        "z": "9af5bfd06b294546",
+        "name": "debug 122",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "decfb1bf26c0244f",
+        "type": "mqtt in",
+        "z": "9af5bfd06b294546",
+        "name": "",
+        "topic": "Sonoff_DIY/response",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b8f3330d4af5f7f3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 80,
         "wires": [
             [
-                "0c79fc091f642151"
+                "43840fd0e056a6ce"
             ]
         ]
     },
     {
-        "id": "d15690db5ad96de7",
-        "type": "junction",
-        "z": "e94c6cf641652ce9",
-        "x": 1860,
-        "y": 680,
+        "id": "43840fd0e056a6ce",
+        "type": "debug",
+        "z": "9af5bfd06b294546",
+        "name": "debug 123",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "c3972a9427d64087",
+        "type": "mqtt in",
+        "z": "9af5bfd06b294546",
+        "name": "",
+        "topic": "Sonoff_DIY/Formatted",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b8f3330d4af5f7f3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 120,
         "wires": [
             [
-                "b74043aea0843b59",
-                "a1b9921bbd5e9f97"
+                "d91df986fcbc3276"
             ]
         ]
     },
     {
-        "id": "7feb0b10ed55995f",
-        "type": "junction",
-        "z": "e94c6cf641652ce9",
-        "x": 2560,
-        "y": 280,
+        "id": "49f677b06141c4d3",
+        "type": "debug",
+        "z": "9af5bfd06b294546",
+        "name": "debug 124",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "d4b849bd23b78851",
+        "type": "mqtt in",
+        "z": "9af5bfd06b294546",
+        "name": "",
+        "topic": "Sonoff_DIY/DEBUG",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b8f3330d4af5f7f3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 110,
+        "y": 160,
         "wires": [
             [
-                "6b250fc57ad249c0"
+                "893957d6045e9098"
             ]
         ]
     },
     {
-        "id": "2a5c128012f86cfe",
-        "type": "junction",
-        "z": "e94c6cf641652ce9",
-        "x": 2480,
-        "y": 540,
-        "wires": [
-            [
-                "fde7e323dd3e2a06"
-            ]
-        ]
+        "id": "893957d6045e9098",
+        "type": "debug",
+        "z": "9af5bfd06b294546",
+        "name": "debug 125",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 160,
+        "wires": []
     },
     {
-        "id": "2ca136ef970bf645",
-        "type": "junction",
-        "z": "e94c6cf641652ce9",
-        "x": 2560,
-        "y": 500,
-        "wires": [
-            [
-                "832af1d5922758f7",
-                "47d7c10931c91f42"
-            ]
-        ]
+        "id": "2207538d1d3ba171",
+        "type": "comment",
+        "z": "9af5bfd06b294546",
+        "name": "MiniR2",
+        "info": "[BASICR3/RFR3/MINI HTTP API](\nhttps://sonoff.tech/sonoff-diy-developer-documentation-basicr3-rfr3-mini-http-api/#7)",
+        "x": 770,
+        "y": 80,
+        "wires": []
     },
     {
-        "id": "8d112b8d133db4de",
-        "type": "junction",
-        "z": "e94c6cf641652ce9",
-        "x": 960,
-        "y": 500,
-        "wires": [
-            [
-                "eb66591c76386c7b",
-                "45624806df1bf085"
-            ]
-        ]
+        "id": "a497e1b7b9ee0a78",
+        "type": "config",
+        "z": "9af5bfd06b294546",
+        "name": "",
+        "properties": [
+            {
+                "p": "Sonoff.Device",
+                "pt": "flow",
+                "to": "MiniR3_DIY",
+                "tot": "str"
+            },
+            {
+                "p": "Sonoff.IP",
+                "pt": "flow",
+                "to": "MiniR3_DIY.tinkernet.ca",
+                "tot": "str"
+            },
+            {
+                "p": "Sonoff.ID",
+                "pt": "flow",
+                "to": "10017766a6",
+                "tot": "str"
+            }
+        ],
+        "active": true,
+        "x": 950,
+        "y": 80,
+        "wires": []
     },
     {
-        "id": "b1ce803f7f659fc5",
-        "type": "junction",
-        "z": "e94c6cf641652ce9",
-        "x": 880,
-        "y": 540,
-        "wires": [
-            [
-                "0647cae691a15607"
-            ]
-        ]
-    },
-    {
-        "id": "523f5a8f62ac33bd",
-        "type": "junction",
-        "z": "e94c6cf641652ce9",
-        "x": 1120,
-        "y": 300,
-        "wires": [
-            [
-                "ca344c09d637a8d4"
-            ]
-        ]
-    },
-    {
-        "id": "54840d9866fe43ec",
+        "id": "ddce0938840b0583",
         "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Set ID & Address",
+        "z": "9af5bfd06b294546",
+        "name": "Check it",
+        "props": [
+            {
+                "p": "payload.Device",
+                "v": "Sonoff",
+                "vt": "flow"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 960,
+        "y": 120,
+        "wires": [
+            [
+                "f3814143bc95a969"
+            ]
+        ]
+    },
+    {
+        "id": "f3814143bc95a969",
+        "type": "debug",
+        "z": "9af5bfd06b294546",
+        "name": "Result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.Device",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1090,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "d91df986fcbc3276",
+        "type": "function",
+        "z": "9af5bfd06b294546",
+        "name": "function 34",
+        "func": "var original = msg.payload;\n\nmsg.payload =\nmsg.topic +\n\"\\n\\n\" +\noriginal;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 120,
+        "wires": [
+            [
+                "49f677b06141c4d3"
+            ]
+        ]
+    },
+    {
+        "id": "5a3c4d6a2c847327",
+        "type": "inject",
+        "z": "9af5bfd06b294546",
+        "name": "Request Status",
         "props": [
             {
                 "p": "payload"
@@ -308,73 +276,61 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "topic": "10017766a6",
-        "payload": "MiniR3_DIY.tinkernet.ca",
-        "payloadType": "str",
-        "x": 120,
-        "y": 60,
+        "topic": "MiniR2_DIY",
+        "payload": "{\"Function\":\"Status\"}",
+        "payloadType": "json",
+        "x": 140,
+        "y": 280,
         "wires": [
             [
-                "f4a81685744dd841"
+                "d48b258b3655921e"
             ]
         ]
     },
     {
-        "id": "d13aca8a2f5a1e02",
-        "type": "comment",
-        "z": "e94c6cf641652ce9",
-        "name": "MiniR3",
-        "info": "[MINIR3 HTTP API](https://sonoff.tech/sonoff-diy-developer-documentation-minir3-http-api/#2)\n\nMust connect this device to Ewelink to get Device ID\n\nWhich is: 10017766a6\n",
-        "x": 90,
-        "y": 20,
+        "id": "92ff322d03e5b1fb",
+        "type": "mqtt out",
+        "z": "9af5bfd06b294546",
+        "name": "",
+        "topic": "Sonoff_DIY/cmnd",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b8f3330d4af5f7f3",
+        "x": 490,
+        "y": 320,
         "wires": []
     },
     {
-        "id": "0bb31cc4ae18a6bd",
-        "type": "comment",
-        "z": "e94c6cf641652ce9",
-        "name": "Switching",
-        "info": "This needs a pile of work...\n",
-        "x": 620,
-        "y": 20,
-        "wires": []
-    },
-    {
-        "id": "0506ea84019cf77a",
-        "type": "comment",
-        "z": "e94c6cf641652ce9",
-        "name": "Inching",
-        "info": "",
-        "x": 1410,
-        "y": 20,
-        "wires": []
-    },
-    {
-        "id": "8152bd9ebda361ad",
+        "id": "bb55bd8c31b9fd83",
         "type": "debug",
-        "z": "e94c6cf641652ce9",
-        "name": "debug 8",
-        "active": true,
+        "z": "9af5bfd06b294546",
+        "name": "104",
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
+        "complete": "true",
+        "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 280,
-        "y": 100,
+        "x": 290,
+        "y": 240,
         "wires": []
     },
     {
-        "id": "368bfc2557ad7376",
+        "id": "d48b258b3655921e",
         "type": "change",
-        "z": "e94c6cf641652ce9",
-        "name": "Check it",
+        "z": "9af5bfd06b294546",
+        "name": "poop",
         "rules": [
             {
                 "t": "set",
-                "p": "payload",
+                "p": "payload.Device",
                 "pt": "msg",
                 "to": "Sonoff",
                 "tot": "flow"
@@ -385,49 +341,1034 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 140,
-        "y": 100,
+        "x": 290,
+        "y": 280,
         "wires": [
             [
-                "8152bd9ebda361ad"
+                "bb55bd8c31b9fd83",
+                "e80b84a7f58425d2"
             ]
         ]
     },
     {
-        "id": "471f620ff384ce5a",
-        "type": "comment",
-        "z": "e94c6cf641652ce9",
-        "name": "OTA commands",
-        "info": "",
-        "x": 120,
-        "y": 580,
+        "id": "ba599c28902cb89f",
+        "type": "mqtt out",
+        "z": "9af5bfd06b294546",
+        "name": "",
+        "topic": "Sonoff_DIY/cmnd",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b8f3330d4af5f7f3",
+        "x": 490,
+        "y": 480,
         "wires": []
     },
     {
-        "id": "391d2d6389a62d5e",
-        "type": "comment",
-        "z": "e94c6cf641652ce9",
-        "name": "WiFi",
-        "info": "",
-        "x": 90,
+        "id": "284de102ddce33f1",
+        "type": "inject",
+        "z": "9af5bfd06b294546",
+        "name": "off",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "MiniR2_DIY",
+        "payload": "{\"Function\":\"switching\",\"SwitchNum\":\"0\",\"Action\":\"off\"}",
+        "payloadType": "json",
+        "x": 110,
+        "y": 460,
+        "wires": [
+            [
+                "bc90cd7b4789b544"
+            ]
+        ]
+    },
+    {
+        "id": "a612e28e8852239d",
+        "type": "debug",
+        "z": "9af5bfd06b294546",
+        "name": "108",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 290,
         "y": 400,
         "wires": []
     },
     {
-        "id": "597b78813c27a8e2",
-        "type": "comment",
-        "z": "e94c6cf641652ce9",
-        "name": "Device info/Status",
-        "info": "",
-        "x": 130,
-        "y": 260,
+        "id": "2e547f4c4a489c40",
+        "type": "mqtt out",
+        "z": "9af5bfd06b294546",
+        "name": "",
+        "topic": "Sonoff_DIY/cmnd",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b8f3330d4af5f7f3",
+        "x": 490,
+        "y": 720,
         "wires": []
     },
     {
-        "id": "1248b0a1aa6e4804",
+        "id": "ba9c8d676510fef5",
         "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "WiFi signal",
+        "z": "9af5bfd06b294546",
+        "name": "on 2k ms",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "MiniR2_DIY",
+        "payload": "{\"SwitchNum\":\"0\",\"Function\":\"inching\",\"Action\":\"on\",\"Length\":2000}",
+        "payloadType": "json",
+        "x": 120,
+        "y": 680,
+        "wires": [
+            [
+                "9ec5715012575f91"
+            ]
+        ]
+    },
+    {
+        "id": "94b4637f1cbfa783",
+        "type": "debug",
+        "z": "9af5bfd06b294546",
+        "name": "109",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 290,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "1efc49b5a9fdf054",
+        "type": "mqtt out",
+        "z": "9af5bfd06b294546",
+        "name": "",
+        "topic": "Sonoff_DIY/cmnd",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b8f3330d4af5f7f3",
+        "x": 1090,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "86565f91d9c54ff0",
+        "type": "inject",
+        "z": "9af5bfd06b294546",
+        "name": "on",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "MiniR2_DIY",
+        "payload": "{\"SwitchNum\":\"0\",\"Function\":\"POS\",\"Action\":\"on\"}",
+        "payloadType": "json",
+        "x": 710,
+        "y": 280,
+        "wires": [
+            [
+                "5701d23c69cdb841"
+            ]
+        ]
+    },
+    {
+        "id": "c83591303af464ac",
+        "type": "debug",
+        "z": "9af5bfd06b294546",
+        "name": "110",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "8c80c290a27c4223",
+        "type": "inject",
+        "z": "9af5bfd06b294546",
+        "name": "on",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "MiniR2_DIY",
+        "payload": "{\"Function\":\"switching\",\"SwitchNum\":\"0\",\"Action\":\"on\"}",
+        "payloadType": "json",
+        "x": 110,
+        "y": 420,
+        "wires": [
+            [
+                "bc90cd7b4789b544"
+            ]
+        ]
+    },
+    {
+        "id": "7cf7125f61c844e5",
+        "type": "inject",
+        "z": "9af5bfd06b294546",
+        "name": "toggle",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "MiniR2_DIY",
+        "payload": "{\"Function\":\"switching\",\"SwitchNum\":\"0\",\"Action\":\"toggle\"}",
+        "payloadType": "json",
+        "x": 110,
+        "y": 380,
+        "wires": [
+            [
+                "bc90cd7b4789b544"
+            ]
+        ]
+    },
+    {
+        "id": "7967c52d0c2e30a2",
+        "type": "inject",
+        "z": "9af5bfd06b294546",
+        "name": "status",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "MiniR2_DIY",
+        "payload": "{\"Function\":\"switching\",\"SwitchNum\":\"0\",\"Action\":\"status\"}",
+        "payloadType": "json",
+        "x": 110,
+        "y": 500,
+        "wires": [
+            [
+                "bc90cd7b4789b544"
+            ]
+        ]
+    },
+    {
+        "id": "bc90cd7b4789b544",
+        "type": "change",
+        "z": "9af5bfd06b294546",
+        "name": "poop",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.Device",
+                "pt": "msg",
+                "to": "Sonoff",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 440,
+        "wires": [
+            [
+                "a612e28e8852239d",
+                "a9dab2d4ab44825b"
+            ]
+        ]
+    },
+    {
+        "id": "757d4ccec55bb59b",
+        "type": "inject",
+        "z": "9af5bfd06b294546",
+        "name": "bork",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "MiniR2_DIY",
+        "payload": "{\"Function\":\"switching\",\"SwitchNum\":\"0\",\"Action\":\"bork\"}",
+        "payloadType": "json",
+        "x": 130,
+        "y": 540,
+        "wires": [
+            [
+                "bc90cd7b4789b544"
+            ]
+        ]
+    },
+    {
+        "id": "9ec5715012575f91",
+        "type": "change",
+        "z": "9af5bfd06b294546",
+        "name": "poop",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.Device",
+                "pt": "msg",
+                "to": "Sonoff",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 680,
+        "wires": [
+            [
+                "94b4637f1cbfa783",
+                "dbbef55edbd24173"
+            ]
+        ]
+    },
+    {
+        "id": "91137c7d733330b8",
+        "type": "inject",
+        "z": "9af5bfd06b294546",
+        "name": "off",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "MiniR2_DIY",
+        "payload": "{\"SwitchNum\":\"0\",\"Function\":\"inching\",\"Action\":\"off\",\"Length\":0}",
+        "payloadType": "json",
+        "x": 110,
+        "y": 720,
+        "wires": [
+            [
+                "9ec5715012575f91"
+            ]
+        ]
+    },
+    {
+        "id": "a89200cc6d72f7db",
+        "type": "inject",
+        "z": "9af5bfd06b294546",
+        "name": "on 500 ms",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "MiniR2_DIY",
+        "payload": "{\"SwitchNum\":\"0\",\"Function\":\"inching\",\"Action\":\"on\",\"Length\":500}",
+        "payloadType": "json",
+        "x": 120,
+        "y": 640,
+        "wires": [
+            [
+                "9ec5715012575f91"
+            ]
+        ]
+    },
+    {
+        "id": "dca1c1dd0d38a4e5",
+        "type": "inject",
+        "z": "9af5bfd06b294546",
+        "name": "status",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "MiniR2_DIY",
+        "payload": "{\"Function\":\"inching\",\"SwitchNum\":\"0\",\"Action\":\"status\"}",
+        "payloadType": "json",
+        "x": 110,
+        "y": 760,
+        "wires": [
+            [
+                "9ec5715012575f91"
+            ]
+        ]
+    },
+    {
+        "id": "5701d23c69cdb841",
+        "type": "change",
+        "z": "9af5bfd06b294546",
+        "name": "poop",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.Device",
+                "pt": "msg",
+                "to": "Sonoff",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 890,
+        "y": 320,
+        "wires": [
+            [
+                "c83591303af464ac",
+                "d31774f4eb7837b8"
+            ]
+        ]
+    },
+    {
+        "id": "375142b3f4437587",
+        "type": "inject",
+        "z": "9af5bfd06b294546",
+        "name": "off",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "MiniR2_DIY",
+        "payload": "{\"SwitchNum\":\"0\",\"Function\":\"POS\",\"Action\":\"off\"}",
+        "payloadType": "json",
+        "x": 710,
+        "y": 320,
+        "wires": [
+            [
+                "5701d23c69cdb841"
+            ]
+        ]
+    },
+    {
+        "id": "91e8ba7bb03b2115",
+        "type": "inject",
+        "z": "9af5bfd06b294546",
+        "name": "stay",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "MiniR2_DIY",
+        "payload": "{\"SwitchNum\":\"0\",\"Function\":\"POS\",\"Action\":\"stay\"}",
+        "payloadType": "json",
+        "x": 710,
+        "y": 360,
+        "wires": [
+            [
+                "5701d23c69cdb841"
+            ]
+        ]
+    },
+    {
+        "id": "6c395552c378c89e",
+        "type": "inject",
+        "z": "9af5bfd06b294546",
+        "name": "status",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "MiniR2_DIY",
+        "payload": "{\"Function\":\"POS\",\"SwitchNum\":\"0\",\"Action\":\"status\"}",
+        "payloadType": "json",
+        "x": 710,
+        "y": 400,
+        "wires": [
+            [
+                "5701d23c69cdb841"
+            ]
+        ]
+    },
+    {
+        "id": "cd4d7f0ca152ac46",
+        "type": "comment",
+        "z": "9af5bfd06b294546",
+        "name": "Device Info",
+        "info": "",
+        "x": 80,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "4fb5c905721c3975",
+        "type": "comment",
+        "z": "9af5bfd06b294546",
+        "name": "Switch",
+        "info": "",
+        "x": 70,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "a0f587dbb436fefb",
+        "type": "comment",
+        "z": "9af5bfd06b294546",
+        "name": "Inching",
+        "info": "",
+        "x": 70,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "65f4c6817cc4ff96",
+        "type": "comment",
+        "z": "9af5bfd06b294546",
+        "name": "Power On State",
+        "info": "",
+        "x": 700,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "70b911f55acf9fe8",
+        "type": "change",
+        "z": "9af5bfd06b294546",
+        "name": "poop",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.Device",
+                "pt": "msg",
+                "to": "Sonoff",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 890,
+        "y": 540,
+        "wires": [
+            [
+                "cf19cdc2bb5024af",
+                "8193729fd747f013"
+            ]
+        ]
+    },
+    {
+        "id": "38422e67d4d71504",
+        "type": "change",
+        "z": "9af5bfd06b294546",
+        "name": "poop",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.Device",
+                "pt": "msg",
+                "to": "Sonoff",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 890,
+        "y": 720,
+        "wires": [
+            [
+                "a5e0c1bb37ec5fd5",
+                "557123be3281ee4a"
+            ]
+        ]
+    },
+    {
+        "id": "cf19cdc2bb5024af",
+        "type": "debug",
+        "z": "9af5bfd06b294546",
+        "name": "120",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "a5e0c1bb37ec5fd5",
+        "type": "debug",
+        "z": "9af5bfd06b294546",
+        "name": "121",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "b29a4dfcbb4be126",
+        "type": "mqtt out",
+        "z": "9af5bfd06b294546",
+        "name": "",
+        "topic": "Sonoff_DIY/cmnd",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b8f3330d4af5f7f3",
+        "x": 1090,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "1f632ef7288c02fd",
+        "type": "mqtt out",
+        "z": "9af5bfd06b294546",
+        "name": "",
+        "topic": "Sonoff_DIY/cmnd",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b8f3330d4af5f7f3",
+        "x": 1090,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "3a85b1459e4123ba",
+        "type": "inject",
+        "z": "9af5bfd06b294546",
+        "name": "toggle",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "control",
+        "payload": "toggle",
+        "payloadType": "str",
+        "x": 1050,
+        "y": 680,
+        "wires": [
+            [
+                "557123be3281ee4a"
+            ]
+        ]
+    },
+    {
+        "id": "557123be3281ee4a",
+        "type": "gate",
+        "z": "9af5bfd06b294546",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "open",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 1050,
+        "y": 720,
+        "wires": [
+            [
+                "1f632ef7288c02fd"
+            ]
+        ]
+    },
+    {
+        "id": "4062366406e96fbf",
+        "type": "inject",
+        "z": "9af5bfd06b294546",
+        "name": "toggle",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "control",
+        "payload": "toggle",
+        "payloadType": "str",
+        "x": 1050,
+        "y": 500,
+        "wires": [
+            [
+                "8193729fd747f013"
+            ]
+        ]
+    },
+    {
+        "id": "8193729fd747f013",
+        "type": "gate",
+        "z": "9af5bfd06b294546",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "open",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 1050,
+        "y": 540,
+        "wires": [
+            [
+                "b29a4dfcbb4be126"
+            ]
+        ]
+    },
+    {
+        "id": "e0a2d09c8fa40c7d",
+        "type": "inject",
+        "z": "9af5bfd06b294546",
+        "name": "toggle",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "control",
+        "payload": "toggle",
+        "payloadType": "str",
+        "x": 450,
+        "y": 400,
+        "wires": [
+            [
+                "a9dab2d4ab44825b"
+            ]
+        ]
+    },
+    {
+        "id": "a9dab2d4ab44825b",
+        "type": "gate",
+        "z": "9af5bfd06b294546",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "open",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 450,
+        "y": 440,
+        "wires": [
+            [
+                "ba599c28902cb89f"
+            ]
+        ]
+    },
+    {
+        "id": "abf9ea86c80da307",
+        "type": "inject",
+        "z": "9af5bfd06b294546",
+        "name": "toggle",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "control",
+        "payload": "toggle",
+        "payloadType": "str",
+        "x": 450,
+        "y": 640,
+        "wires": [
+            [
+                "dbbef55edbd24173"
+            ]
+        ]
+    },
+    {
+        "id": "dbbef55edbd24173",
+        "type": "gate",
+        "z": "9af5bfd06b294546",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "open",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 450,
+        "y": 680,
+        "wires": [
+            [
+                "2e547f4c4a489c40"
+            ]
+        ]
+    },
+    {
+        "id": "c36fbcbe2b96cefc",
+        "type": "inject",
+        "z": "9af5bfd06b294546",
+        "name": "toggle",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "control",
+        "payload": "toggle",
+        "payloadType": "str",
+        "x": 1050,
+        "y": 280,
+        "wires": [
+            [
+                "d31774f4eb7837b8"
+            ]
+        ]
+    },
+    {
+        "id": "d31774f4eb7837b8",
+        "type": "gate",
+        "z": "9af5bfd06b294546",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "open",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 1050,
+        "y": 320,
+        "wires": [
+            [
+                "1efc49b5a9fdf054"
+            ]
+        ]
+    },
+    {
+        "id": "a1f858f7293d91ee",
+        "type": "inject",
+        "z": "9af5bfd06b294546",
+        "name": "toggle",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "control",
+        "payload": "toggle",
+        "payloadType": "str",
+        "x": 450,
+        "y": 240,
+        "wires": [
+            [
+                "e80b84a7f58425d2"
+            ]
+        ]
+    },
+    {
+        "id": "e80b84a7f58425d2",
+        "type": "gate",
+        "z": "9af5bfd06b294546",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "open",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "defaultCmd": "default",
+        "statusCmd": "status",
+        "persist": false,
+        "storeName": "memory",
+        "x": 450,
+        "y": 280,
+        "wires": [
+            [
+                "92ff322d03e5b1fb"
+            ]
+        ]
+    },
+    {
+        "id": "f1893b4370914592",
+        "type": "comment",
+        "z": "9af5bfd06b294546",
+        "name": "turns off switch...",
+        "info": "",
+        "x": 300,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "887ff595bc3b703a",
+        "type": "comment",
+        "z": "9af5bfd06b294546",
+        "name": "WiFi",
+        "info": "",
+        "x": 670,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "d51636e2fc607ed8",
+        "type": "comment",
+        "z": "9af5bfd06b294546",
+        "name": "OTA commands",
+        "info": "",
+        "x": 700,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "74eaa47dc870accd",
+        "type": "inject",
+        "z": "9af5bfd06b294546",
+        "name": "signal",
         "props": [
             {
                 "p": "Device",
@@ -447,22 +1388,21 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "signal_strength",
-        "payload": "{}",
+        "payload": "{\"Function\":\"WiFi\",\"Action\":\"Signal_Strength\"}",
         "payloadType": "json",
-        "x": 100,
-        "y": 440,
+        "x": 710,
+        "y": 540,
         "wires": [
             [
-                "11bae9282cda667d"
+                "70b911f55acf9fe8"
             ]
         ]
     },
     {
-        "id": "c00b7950a6a4bfc1",
+        "id": "2bd3a519059cafc3",
         "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "d": true,
-        "name": "WiFi creds",
+        "z": "9af5bfd06b294546",
+        "name": "creds",
         "props": [
             {
                 "p": "Device",
@@ -482,21 +1422,21 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "wifi",
-        "payload": "{\"ssid\": \"yourSSID\", \"password\": \"yourPASS\"}",
+        "payload": "{\"Function\":\"WiFi\",\"Action\":\"Configure\",\"ssid\":\"yourSSID\",\"password\":\"yourPASS\"}",
         "payloadType": "json",
-        "x": 100,
-        "y": 480,
+        "x": 710,
+        "y": 500,
         "wires": [
             [
-                "11bae9282cda667d"
+                "70b911f55acf9fe8"
             ]
         ]
     },
     {
-        "id": "1208fe8bb8751242",
+        "id": "6223fe383153c9ce",
         "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "OTA Unlock",
+        "z": "9af5bfd06b294546",
+        "name": "Unlock",
         "props": [
             {
                 "p": "Device",
@@ -516,21 +1456,21 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "ota_unlock",
-        "payload": "{}",
+        "payload": "{\"Function\":\"OTA\",\"Action\":\"OTA_unlock\"}",
         "payloadType": "json",
-        "x": 110,
-        "y": 620,
+        "x": 710,
+        "y": 680,
         "wires": [
             [
-                "ece60c9548e45309"
+                "38422e67d4d71504"
             ]
         ]
     },
     {
-        "id": "f2c54b80021cfe54",
+        "id": "c1e69dc6438f9bdf",
         "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "OTA Flash",
+        "z": "9af5bfd06b294546",
+        "name": "Flash",
         "props": [
             {
                 "p": "Device",
@@ -550,1197 +1490,27 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "ota_flash",
-        "payload": "{\"downloadUrl\": \"http://192.168.1.112/ota/firmware.bin\",          \"sha256sum\"  : \"123sa32s1da2354f9874fewsd21s6afd49wf4wefs1df59\"}",
+        "payload": "{\"Function\":\"OTA\",\"Action\":\"OTA_flash\",\"downloadUrl\":\"http://192.168.1.112/ota/firmware.bin\",\"sha256sum\":\"123sa32s1da2354f9874fewsd21s6afd49wf4wefs1df59\"}",
         "payloadType": "json",
-        "x": 100,
-        "y": 660,
-        "wires": [
-            [
-                "ece60c9548e45309"
-            ]
-        ]
-    },
-    {
-        "id": "694f33b4d13d3824",
-        "type": "change",
-        "z": "e94c6cf641652ce9",
-        "name": "filter",
-        "rules": [
-            {
-                "t": "move",
-                "p": "payload.data.rssi",
-                "pt": "msg",
-                "to": "tmp.signalStrength",
-                "tot": "msg"
-            },
-            {
-                "t": "move",
-                "p": "payload.data.bssid",
-                "pt": "msg",
-                "to": "tmp.bssid",
-                "tot": "msg"
-            },
-            {
-                "t": "move",
-                "p": "tmp",
-                "pt": "msg",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 410,
-        "y": 500,
-        "wires": [
-            [
-                "9a10a6d8970ea4f5"
-            ]
-        ]
-    },
-    {
-        "id": "710968ab3cebf9e7",
-        "type": "change",
-        "z": "e94c6cf641652ce9",
-        "name": "filter",
-        "rules": [
-            {
-                "t": "move",
-                "p": "payload.data.deviceid",
-                "pt": "msg",
-                "to": "tmp.deviceid",
-                "tot": "msg"
-            },
-            {
-                "t": "move",
-                "p": "payload.data.otaUnlock",
-                "pt": "msg",
-                "to": "tmp.otaUnlock",
-                "tot": "msg"
-            },
-            {
-                "t": "move",
-                "p": "tmp",
-                "pt": "msg",
-                "to": "payload",
-                "tot": "msg"
-            },
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "MiniR3 FirmWare Blows",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 410,
-        "y": 680,
-        "wires": [
-            [
-                "4e5c677a80125d88"
-            ]
-        ]
-    },
-    {
-        "id": "ece60c9548e45309",
-        "type": "subflow:f92a0611f953efce",
-        "z": "e94c6cf641652ce9",
-        "d": true,
-        "name": "",
-        "x": 280,
-        "y": 620,
-        "wires": [
-            [
-                "6c89d9a215ad21e1",
-                "4c8904bcb6f20598"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "11bae9282cda667d",
-        "type": "subflow:f92a0611f953efce",
-        "z": "e94c6cf641652ce9",
-        "name": "",
-        "x": 280,
-        "y": 440,
-        "wires": [
-            [
-                "fa0492cd5381f83d",
-                "1f61276f4bb3c834"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "0eee2642ad1adbd9",
-        "type": "debug",
-        "z": "e94c6cf641652ce9",
-        "name": "Status",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 390,
-        "y": 160,
-        "wires": []
-    },
-    {
-        "id": "d59f4b51f3ed618e",
-        "type": "debug",
-        "z": "e94c6cf641652ce9",
-        "name": "Response",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 160,
-        "y": 160,
-        "wires": []
-    },
-    {
-        "id": "ee01906c603bb7e3",
-        "type": "link in",
-        "z": "e94c6cf641652ce9",
-        "name": "link in 5",
-        "links": [
-            "1ee9886d5fc189d8",
-            "9a10a6d8970ea4f5",
-            "4e5c677a80125d88",
-            "c5245953f3cc6154",
-            "d45cf6194764da2f",
-            "0cc5b2c9616405cc",
-            "747910efe3b6f4b3",
-            "fc9fcb20fe57dfe7",
-            "455cf4d9e13a72c6",
-            "f8009480b924e7a4",
-            "69e220c2127c5f82",
-            "2cea97aff62d6b13"
-        ],
-        "x": 305,
-        "y": 160,
-        "wires": [
-            [
-                "0eee2642ad1adbd9"
-            ]
-        ]
-    },
-    {
-        "id": "fa0492cd5381f83d",
-        "type": "link out",
-        "z": "e94c6cf641652ce9",
-        "name": "link out 39",
-        "mode": "link",
-        "links": [
-            "6e47459bd4b9f6db",
-            "916f96b72f118288"
-        ],
-        "x": 485,
-        "y": 420,
-        "wires": [],
-        "icon": "node-red/alert.svg"
-    },
-    {
-        "id": "6e47459bd4b9f6db",
-        "type": "link in",
-        "z": "e94c6cf641652ce9",
-        "name": "link in 6",
-        "links": [
-            "fa0492cd5381f83d",
-            "ff0e14c2ae635fff",
-            "6c89d9a215ad21e1",
-            "37ab1cada8541705",
-            "48aebd7875eb7c0f",
-            "849034361f2c6fcb",
-            "3acefaf6c5da7311",
-            "324d33914b484438"
-        ],
-        "x": 65,
-        "y": 160,
-        "wires": [
-            [
-                "d59f4b51f3ed618e"
-            ]
-        ],
-        "icon": "node-red/alert.svg"
-    },
-    {
-        "id": "6c89d9a215ad21e1",
-        "type": "link out",
-        "z": "e94c6cf641652ce9",
-        "name": "link out 41",
-        "mode": "link",
-        "links": [
-            "6e47459bd4b9f6db",
-            "916f96b72f118288"
-        ],
-        "x": 485,
-        "y": 600,
-        "wires": [],
-        "icon": "node-red/alert.svg"
-    },
-    {
-        "id": "9a10a6d8970ea4f5",
-        "type": "link out",
-        "z": "e94c6cf641652ce9",
-        "name": "link out 42",
-        "mode": "link",
-        "links": [
-            "ee01906c603bb7e3",
-            "4223a86c7d312548"
-        ],
-        "x": 485,
-        "y": 500,
-        "wires": []
-    },
-    {
-        "id": "4e5c677a80125d88",
-        "type": "link out",
-        "z": "e94c6cf641652ce9",
-        "name": "link out 43",
-        "mode": "link",
-        "links": [
-            "ee01906c603bb7e3",
-            "4223a86c7d312548"
-        ],
-        "x": 485,
-        "y": 680,
-        "wires": []
-    },
-    {
-        "id": "13dfe73d91c18240",
-        "type": "comment",
-        "z": "e94c6cf641652ce9",
-        "name": "GGGrrr...",
-        "info": "MiniR3 does not return **deviceid** or **ssid**\n& it returns **signalStrength** as **rssi**\n\nAlso...\nApparently, setting WiFi credentials doesn't work either...",
-        "x": 220,
-        "y": 400,
-        "wires": []
-    },
-    {
-        "id": "460bebefbf4dd488",
-        "type": "comment",
-        "z": "e94c6cf641652ce9",
-        "name": "GGGrrr...",
-        "info": "MiniR3 does not return **deviceid** or **otaUnlock**",
-        "x": 280,
-        "y": 580,
-        "wires": []
-    },
-    {
-        "id": "90748db26ed4f261",
-        "type": "comment",
-        "z": "e94c6cf641652ce9",
-        "name": "Power-on State",
-        "info": "",
-        "x": 2260,
-        "y": 20,
-        "wires": []
-    },
-    {
-        "id": "9322597680854a1f",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Inching . 500ms-->on",
-        "props": [
-            {
-                "p": "Width",
-                "v": "500",
-                "vt": "num"
-            },
-            {
-                "p": "Desire",
-                "v": "on",
-                "vt": "str"
-            },
-            {
-                "p": "Finish",
-                "v": "on",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 1440,
-        "y": 140,
-        "wires": [
-            [
-                "8c4a2b2ccc35a029"
-            ]
-        ]
-    },
-    {
-        "id": "1f1c1d35da629d6b",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "OFF",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "off",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 1670,
-        "y": 100,
-        "wires": [
-            [
-                "8c4a2b2ccc35a029"
-            ]
-        ]
-    },
-    {
-        "id": "3d29f2dfb35d9c46",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Inching 2000ms-->on",
-        "props": [
-            {
-                "p": "Width",
-                "v": "2000",
-                "vt": "num"
-            },
-            {
-                "p": "Desire",
-                "v": "on",
-                "vt": "str"
-            },
-            {
-                "p": "Finish",
-                "v": "on",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 1440,
-        "y": 180,
-        "wires": [
-            [
-                "8c4a2b2ccc35a029"
-            ]
-        ]
-    },
-    {
-        "id": "92459f8d1f0b747b",
-        "type": "subflow:f92a0611f953efce",
-        "z": "e94c6cf641652ce9",
-        "name": "",
-        "x": 1900,
-        "y": 480,
-        "wires": [
-            [
-                "37ab1cada8541705",
-                "0c79fc091f642151"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "37ab1cada8541705",
-        "type": "link out",
-        "z": "e94c6cf641652ce9",
-        "name": "link out 46",
-        "mode": "link",
-        "links": [
-            "6e47459bd4b9f6db",
-            "916f96b72f118288"
-        ],
-        "x": 2015,
-        "y": 460,
-        "wires": [],
-        "icon": "node-red/alert.svg"
-    },
-    {
-        "id": "d45cf6194764da2f",
-        "type": "link out",
-        "z": "e94c6cf641652ce9",
-        "name": "link out 47",
-        "mode": "link",
-        "links": [
-            "ee01906c603bb7e3",
-            "4223a86c7d312548"
-        ],
-        "x": 2035,
-        "y": 680,
-        "wires": []
-    },
-    {
-        "id": "a1b9921bbd5e9f97",
-        "type": "change",
-        "z": "e94c6cf641652ce9",
-        "name": "filter",
-        "rules": [
-            {
-                "t": "move",
-                "p": "payload.data.pulses",
-                "pt": "msg",
-                "to": "tmp.pulses",
-                "tot": "msg"
-            },
-            {
-                "t": "move",
-                "p": "tmp",
-                "pt": "msg",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1930,
-        "y": 680,
-        "wires": [
-            [
-                "d45cf6194764da2f"
-            ]
-        ]
-    },
-    {
-        "id": "e58ce13d85c152e1",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "0 ON",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "on",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 610,
-        "y": 100,
-        "wires": [
-            [
-                "6d1e0ea0d59017db"
-            ]
-        ]
-    },
-    {
-        "id": "eb66591c76386c7b",
-        "type": "change",
-        "z": "e94c6cf641652ce9",
-        "name": "filter",
-        "rules": [
-            {
-                "t": "move",
-                "p": "payload.data.switches",
-                "pt": "msg",
-                "to": "tmp.switches",
-                "tot": "msg"
-            },
-            {
-                "t": "move",
-                "p": "tmp",
-                "pt": "msg",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1030,
-        "y": 500,
-        "wires": [
-            [
-                "455cf4d9e13a72c6"
-            ]
-        ]
-    },
-    {
-        "id": "f945b6d16c145cc0",
-        "type": "change",
-        "z": "e94c6cf641652ce9",
-        "name": "select",
-        "rules": [
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "switches",
-                "tot": "str"
-            },
-            {
-                "t": "set",
-                "p": "payload.data.switches[msg.SwitchNum].switch",
-                "pt": "msg",
-                "to": "Desire",
-                "tot": "msg"
-            },
-            {
-                "t": "move",
-                "p": "payload.data.switches",
-                "pt": "msg",
-                "to": "tmp.switches",
-                "tot": "msg"
-            },
-            {
-                "t": "move",
-                "p": "tmp",
-                "pt": "msg",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1030,
-        "y": 300,
-        "wires": [
-            [
-                "523f5a8f62ac33bd"
-            ]
-        ]
-    },
-    {
-        "id": "ca344c09d637a8d4",
-        "type": "subflow:f92a0611f953efce",
-        "z": "e94c6cf641652ce9",
-        "name": "",
-        "x": 1020,
-        "y": 340,
-        "wires": [
-            [
-                "ff0e14c2ae635fff",
-                "0647cae691a15607"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "ff0e14c2ae635fff",
-        "type": "link out",
-        "z": "e94c6cf641652ce9",
-        "name": "link out 49",
-        "mode": "link",
-        "links": [
-            "6e47459bd4b9f6db",
-            "916f96b72f118288"
-        ],
-        "x": 1145,
-        "y": 340,
-        "wires": [],
-        "icon": "node-red/alert.svg"
-    },
-    {
-        "id": "455cf4d9e13a72c6",
-        "type": "link out",
-        "z": "e94c6cf641652ce9",
-        "name": "link out 50",
-        "mode": "link",
-        "links": [
-            "ee01906c603bb7e3",
-            "4223a86c7d312548"
-        ],
-        "x": 1145,
-        "y": 500,
-        "wires": []
-    },
-    {
-        "id": "f4a81685744dd841",
-        "type": "change",
-        "z": "e94c6cf641652ce9",
-        "name": "Flow Set",
-        "rules": [
-            {
-                "t": "set",
-                "p": "Sonoff.sonoffIP",
-                "pt": "flow",
-                "to": "payload",
-                "tot": "msg"
-            },
-            {
-                "t": "set",
-                "p": "Sonoff.sonoffID",
-                "pt": "flow",
-                "to": "topic",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 280,
-        "y": 60,
-        "wires": [
-            [
-                "368bfc2557ad7376"
-            ]
-        ]
-    },
-    {
-        "id": "4c8904bcb6f20598",
-        "type": "subflow:ccab8793870fae40",
-        "z": "e94c6cf641652ce9",
-        "name": "",
-        "x": 280,
-        "y": 700,
-        "wires": [
-            [
-                "710968ab3cebf9e7"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "c96fcb6c43850fb9",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Get State",
-        "props": [
-            {
-                "p": "Device",
-                "v": "Sonoff",
-                "vt": "flow"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 120,
-        "y": 700,
-        "wires": [
-            [
-                "4c8904bcb6f20598"
-            ]
-        ]
-    },
-    {
-        "id": "1f61276f4bb3c834",
-        "type": "subflow:ccab8793870fae40",
-        "z": "e94c6cf641652ce9",
-        "name": "",
-        "x": 280,
-        "y": 520,
-        "wires": [
-            [
-                "694f33b4d13d3824"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "501fb440a2aff971",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Get State",
-        "props": [
-            {
-                "p": "Device",
-                "v": "Sonoff",
-                "vt": "flow"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 120,
-        "y": 520,
-        "wires": [
-            [
-                "1f61276f4bb3c834"
-            ]
-        ]
-    },
-    {
-        "id": "59453766b6cf96de",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Get State",
-        "props": [
-            {
-                "p": "Device",
-                "v": "Sonoff",
-                "vt": "flow"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 620,
-        "y": 540,
-        "wires": [
-            [
-                "b1ce803f7f659fc5"
-            ]
-        ]
-    },
-    {
-        "id": "0647cae691a15607",
-        "type": "subflow:ccab8793870fae40",
-        "z": "e94c6cf641652ce9",
-        "name": "",
-        "x": 1020,
-        "y": 460,
-        "wires": [
-            [
-                "8d112b8d133db4de"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "0c79fc091f642151",
-        "type": "subflow:ccab8793870fae40",
-        "z": "e94c6cf641652ce9",
-        "name": "",
-        "x": 1920,
-        "y": 640,
-        "wires": [
-            [
-                "d15690db5ad96de7"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "ea59a95191eb35fe",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Get State",
-        "props": [
-            {
-                "p": "Device",
-                "v": "Sonoff",
-                "vt": "flow"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 1420,
+        "x": 710,
         "y": 720,
         "wires": [
             [
-                "c8745bb0f250adde"
+                "38422e67d4d71504"
             ]
         ]
     },
     {
-        "id": "798c542f70f4b2f3",
-        "type": "subflow:ccab8793870fae40",
-        "z": "e94c6cf641652ce9",
-        "name": "",
-        "x": 240,
-        "y": 320,
-        "wires": [
-            [
-                "f8009480b924e7a4",
-                "5bef555c62a5b926"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "f95ec74da69707fe",
+        "id": "ead0fe7a1ce3bb3c",
         "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Get State",
+        "z": "9af5bfd06b294546",
+        "name": "status",
         "props": [
             {
-                "p": "Device",
-                "v": "Sonoff",
-                "vt": "flow"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 100,
-        "y": 300,
-        "wires": [
-            [
-                "798c542f70f4b2f3"
-            ]
-        ]
-    },
-    {
-        "id": "f8009480b924e7a4",
-        "type": "link out",
-        "z": "e94c6cf641652ce9",
-        "name": "link out 65",
-        "mode": "link",
-        "links": [
-            "ee01906c603bb7e3",
-            "4223a86c7d312548"
-        ],
-        "x": 345,
-        "y": 300,
-        "wires": []
-    },
-    {
-        "id": "296513e0bbfb06fd",
-        "type": "subflow:ccab8793870fae40",
-        "z": "e94c6cf641652ce9",
-        "name": "",
-        "x": 1020,
-        "y": 260,
-        "wires": [
-            [
-                "f945b6d16c145cc0"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "ff1679493e788bcd",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "0 OFF",
-        "props": [
+                "p": "payload"
+            },
             {
-                "p": "Desire",
-                "v": "off",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 610,
-        "y": 140,
-        "wires": [
-            [
-                "6d1e0ea0d59017db"
-            ]
-        ]
-    },
-    {
-        "id": "9c321d241bcdb59c",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "1 ON",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "on",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 630,
-        "y": 220,
-        "wires": [
-            [
-                "733069579f083039"
-            ]
-        ]
-    },
-    {
-        "id": "2cd76c4405c07fdb",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "1 OFF",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "off",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 630,
-        "y": 260,
-        "wires": [
-            [
-                "733069579f083039"
-            ]
-        ]
-    },
-    {
-        "id": "f6b9ced175d7dbbe",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "3 OFF",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "off",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 630,
-        "y": 500,
-        "wires": [
-            [
-                "c951efcf3ddfa4b2"
-            ]
-        ]
-    },
-    {
-        "id": "cad3d548f9985ae5",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "3 ON",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "on",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 630,
-        "y": 460,
-        "wires": [
-            [
-                "c951efcf3ddfa4b2"
-            ]
-        ]
-    },
-    {
-        "id": "849387cccc20ca93",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "2 OFF",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "off",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 610,
-        "y": 380,
-        "wires": [
-            [
-                "677f49e650c4acea"
-            ]
-        ]
-    },
-    {
-        "id": "23098a8aefc7b41e",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "2 ON",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "on",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 610,
-        "y": 340,
-        "wires": [
-            [
-                "677f49e650c4acea"
-            ]
-        ]
-    },
-    {
-        "id": "45624806df1bf085",
-        "type": "function",
-        "z": "e94c6cf641652ce9",
-        "name": "Format",
-        "func": "msg.Formatted =\n\"Switch States\\n\" +\n\"0: \" + msg.payload.data.switches[0].switch + \"\\n\" +\n\"1: \" + msg.payload.data.switches[1].switch + \"\\n\" +\n\"2: \" + msg.payload.data.switches[2].switch + \"\\n\" +\n\"3: \" + msg.payload.data.switches[3].switch;\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1020,
-        "y": 540,
-        "wires": [
-            [
-                "349983e1162eb202"
-            ]
-        ]
-    },
-    {
-        "id": "b74043aea0843b59",
-        "type": "function",
-        "z": "e94c6cf641652ce9",
-        "name": "Format",
-        "func": "msg.Formatted =\n\"Inching States\\n\" +\n\"0: \" + msg.payload.data.pulses[0].pulse + \"\\t\" + msg.payload.data.pulses[0].switch + \"\\t\" + msg.payload.data.pulses[0].width + \"\\n\" +\n\"1: \" + msg.payload.data.pulses[0].pulse + \"\\t\" + msg.payload.data.pulses[1].switch + \"\\t\" + msg.payload.data.pulses[1].width + \"\\n\" +\n\"2: \" + msg.payload.data.pulses[0].pulse + \"\\t\" + msg.payload.data.pulses[2].switch + \"\\t\" + msg.payload.data.pulses[2].width + \"\\n\" +\n\"3: \" + msg.payload.data.pulses[0].pulse + \"\\t\" + msg.payload.data.pulses[3].switch + \"\\t\" + msg.payload.data.pulses[3].width;\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1920,
-        "y": 720,
-        "wires": [
-            [
-                "6adb5c1c471e72b9"
-            ]
-        ]
-    },
-    {
-        "id": "542d109abe488443",
-        "type": "subflow:ccab8793870fae40",
-        "z": "e94c6cf641652ce9",
-        "name": "",
-        "x": 1900,
-        "y": 360,
-        "wires": [
-            [
-                "8c1b9b6e8268f1db"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "8c1b9b6e8268f1db",
-        "type": "function",
-        "z": "e94c6cf641652ce9",
-        "name": "function 22",
-        "func": "msg.topic = \"pulses\";\n\nif (msg.Desire === undefined)\n{\n} else {\nmsg.payload.data.pulses[msg.SwitchNum].pulse = msg.Desire;\n}\n\nif (msg.Width === undefined)\n{\n} else {\nmsg.payload.data.pulses[msg.SwitchNum].width = msg.Width;\n}\n\nif (msg.Finish === undefined)\n{\n} else {\nmsg.payload.data.pulses[msg.SwitchNum].switch = msg.Finish;\n}\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1910,
-        "y": 400,
-        "wires": [
-            [
-                "5269ed4d4ed45260"
-            ]
-        ]
-    },
-    {
-        "id": "5269ed4d4ed45260",
-        "type": "change",
-        "z": "e94c6cf641652ce9",
-        "name": "select",
-        "rules": [
-            {
-                "t": "set",
                 "p": "topic",
-                "pt": "msg",
-                "to": "pulses",
-                "tot": "str"
-            },
-            {
-                "t": "move",
-                "p": "payload.data.pulses",
-                "pt": "msg",
-                "to": "tmp.pulses",
-                "tot": "msg"
-            },
-            {
-                "t": "move",
-                "p": "tmp",
-                "pt": "msg",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1890,
-        "y": 440,
-        "wires": [
-            [
-                "92459f8d1f0b747b"
-            ]
-        ]
-    },
-    {
-        "id": "d4c43e7e545a7e87",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Inching . 500ms-->off",
-        "props": [
-            {
-                "p": "Width",
-                "v": "500",
-                "vt": "num"
-            },
-            {
-                "p": "Desire",
-                "v": "on",
-                "vt": "str"
-            },
-            {
-                "p": "Finish",
-                "v": "off",
                 "vt": "str"
             }
         ],
@@ -1748,1489 +1518,28 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "topic": "",
-        "x": 1440,
-        "y": 60,
-        "wires": [
-            [
-                "8c4a2b2ccc35a029"
-            ]
-        ]
-    },
-    {
-        "id": "818ab788d7b310ef",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Inching 2000ms-->off",
-        "props": [
-            {
-                "p": "Width",
-                "v": "2000",
-                "vt": "num"
-            },
-            {
-                "p": "Desire",
-                "v": "on",
-                "vt": "str"
-            },
-            {
-                "p": "Finish",
-                "v": "off",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 1440,
-        "y": 100,
-        "wires": [
-            [
-                "8c4a2b2ccc35a029"
-            ]
-        ]
-    },
-    {
-        "id": "8c4a2b2ccc35a029",
-        "type": "change",
-        "z": "e94c6cf641652ce9",
-        "name": "SW 0",
-        "rules": [
-            {
-                "t": "set",
-                "p": "Device",
-                "pt": "msg",
-                "to": "Sonoff",
-                "tot": "flow"
-            },
-            {
-                "t": "set",
-                "p": "SwitchNum",
-                "pt": "msg",
-                "to": "0",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1650,
-        "y": 140,
-        "wires": [
-            [
-                "94080c0c5dabb50b"
-            ]
-        ]
-    },
-    {
-        "id": "bf7da14427fdc490",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Inching . 500ms-->on",
-        "props": [
-            {
-                "p": "Width",
-                "v": "500",
-                "vt": "num"
-            },
-            {
-                "p": "Desire",
-                "v": "on",
-                "vt": "str"
-            },
-            {
-                "p": "Finish",
-                "v": "on",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 1460,
-        "y": 300,
-        "wires": [
-            [
-                "3441a538adbd7451"
-            ]
-        ]
-    },
-    {
-        "id": "8eed9c217569a3a8",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "OFF",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "off",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 1670,
-        "y": 260,
-        "wires": [
-            [
-                "3441a538adbd7451"
-            ]
-        ]
-    },
-    {
-        "id": "15fd0d67f0e60886",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Inching 2000ms-->on",
-        "props": [
-            {
-                "p": "Width",
-                "v": "2000",
-                "vt": "num"
-            },
-            {
-                "p": "Desire",
-                "v": "on",
-                "vt": "str"
-            },
-            {
-                "p": "Finish",
-                "v": "on",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 1460,
-        "y": 340,
-        "wires": [
-            [
-                "3441a538adbd7451"
-            ]
-        ]
-    },
-    {
-        "id": "c13e0723a0f3cc9e",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Inching . 500ms-->off",
-        "props": [
-            {
-                "p": "Width",
-                "v": "500",
-                "vt": "num"
-            },
-            {
-                "p": "Desire",
-                "v": "on",
-                "vt": "str"
-            },
-            {
-                "p": "Finish",
-                "v": "off",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 1460,
-        "y": 220,
-        "wires": [
-            [
-                "3441a538adbd7451"
-            ]
-        ]
-    },
-    {
-        "id": "68a19a0caa0fbd13",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Inching 2000ms-->off",
-        "props": [
-            {
-                "p": "Width",
-                "v": "2000",
-                "vt": "num"
-            },
-            {
-                "p": "Desire",
-                "v": "on",
-                "vt": "str"
-            },
-            {
-                "p": "Finish",
-                "v": "off",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 1460,
-        "y": 260,
-        "wires": [
-            [
-                "3441a538adbd7451"
-            ]
-        ]
-    },
-    {
-        "id": "3441a538adbd7451",
-        "type": "change",
-        "z": "e94c6cf641652ce9",
-        "name": "SW 1",
-        "rules": [
-            {
-                "t": "set",
-                "p": "Device",
-                "pt": "msg",
-                "to": "Sonoff",
-                "tot": "flow"
-            },
-            {
-                "t": "set",
-                "p": "SwitchNum",
-                "pt": "msg",
-                "to": "1",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1650,
-        "y": 300,
-        "wires": [
-            [
-                "94080c0c5dabb50b"
-            ]
-        ]
-    },
-    {
-        "id": "94f9d4d3f656e629",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Inching . 500ms-->on",
-        "props": [
-            {
-                "p": "Width",
-                "v": "500",
-                "vt": "num"
-            },
-            {
-                "p": "Desire",
-                "v": "on",
-                "vt": "str"
-            },
-            {
-                "p": "Finish",
-                "v": "on",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 1440,
-        "y": 460,
-        "wires": [
-            [
-                "b76e1e7c3b5fac21"
-            ]
-        ]
-    },
-    {
-        "id": "051b70b973261a4b",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "OFF",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "off",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 1670,
-        "y": 420,
-        "wires": [
-            [
-                "b76e1e7c3b5fac21"
-            ]
-        ]
-    },
-    {
-        "id": "a67fc9b583dcea04",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Inching 2000ms-->on",
-        "props": [
-            {
-                "p": "Width",
-                "v": "2000",
-                "vt": "num"
-            },
-            {
-                "p": "Desire",
-                "v": "on",
-                "vt": "str"
-            },
-            {
-                "p": "Finish",
-                "v": "on",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 1440,
-        "y": 500,
-        "wires": [
-            [
-                "b76e1e7c3b5fac21"
-            ]
-        ]
-    },
-    {
-        "id": "0a03ec6e461a8789",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Inching . 500ms-->off",
-        "props": [
-            {
-                "p": "Width",
-                "v": "500",
-                "vt": "num"
-            },
-            {
-                "p": "Desire",
-                "v": "on",
-                "vt": "str"
-            },
-            {
-                "p": "Finish",
-                "v": "off",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 1440,
-        "y": 380,
-        "wires": [
-            [
-                "b76e1e7c3b5fac21"
-            ]
-        ]
-    },
-    {
-        "id": "e4cf4ff6ea29ddc8",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Inching 2000ms-->off",
-        "props": [
-            {
-                "p": "Width",
-                "v": "2000",
-                "vt": "num"
-            },
-            {
-                "p": "Desire",
-                "v": "on",
-                "vt": "str"
-            },
-            {
-                "p": "Finish",
-                "v": "off",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 1440,
-        "y": 420,
-        "wires": [
-            [
-                "b76e1e7c3b5fac21"
-            ]
-        ]
-    },
-    {
-        "id": "b76e1e7c3b5fac21",
-        "type": "change",
-        "z": "e94c6cf641652ce9",
-        "name": "SW 2",
-        "rules": [
-            {
-                "t": "set",
-                "p": "Device",
-                "pt": "msg",
-                "to": "Sonoff",
-                "tot": "flow"
-            },
-            {
-                "t": "set",
-                "p": "SwitchNum",
-                "pt": "msg",
-                "to": "2",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1650,
-        "y": 460,
-        "wires": [
-            [
-                "94080c0c5dabb50b"
-            ]
-        ]
-    },
-    {
-        "id": "11b58987be01bb4a",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Inching . 500ms-->on",
-        "props": [
-            {
-                "p": "Width",
-                "v": "500",
-                "vt": "num"
-            },
-            {
-                "p": "Desire",
-                "v": "on",
-                "vt": "str"
-            },
-            {
-                "p": "Finish",
-                "v": "on",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 1460,
-        "y": 620,
-        "wires": [
-            [
-                "2256af3ef7b06d5b"
-            ]
-        ]
-    },
-    {
-        "id": "2809b26193879434",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "OFF",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "off",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 1670,
+        "topic": "MiniR2_DIY",
+        "payload": "{\"Function\":\"WiFi\",\"Action\":\"status\"}",
+        "payloadType": "json",
+        "x": 730,
         "y": 580,
         "wires": [
             [
-                "2256af3ef7b06d5b"
+                "70b911f55acf9fe8"
             ]
         ]
     },
     {
-        "id": "d55bba7851d87f47",
+        "id": "b16eb194a409245b",
         "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Inching 2000ms-->on",
+        "z": "9af5bfd06b294546",
+        "name": "status",
         "props": [
             {
-                "p": "Width",
-                "v": "2000",
-                "vt": "num"
+                "p": "payload"
             },
             {
-                "p": "Desire",
-                "v": "on",
-                "vt": "str"
-            },
-            {
-                "p": "Finish",
-                "v": "on",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 1460,
-        "y": 660,
-        "wires": [
-            [
-                "2256af3ef7b06d5b"
-            ]
-        ]
-    },
-    {
-        "id": "cf6a2aaffb1e69a9",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Inching . 500ms-->off",
-        "props": [
-            {
-                "p": "Width",
-                "v": "500",
-                "vt": "num"
-            },
-            {
-                "p": "Desire",
-                "v": "on",
-                "vt": "str"
-            },
-            {
-                "p": "Finish",
-                "v": "off",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 1460,
-        "y": 540,
-        "wires": [
-            [
-                "2256af3ef7b06d5b"
-            ]
-        ]
-    },
-    {
-        "id": "4140765d5fabae6d",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Inching 2000ms-->off",
-        "props": [
-            {
-                "p": "Width",
-                "v": "2000",
-                "vt": "num"
-            },
-            {
-                "p": "Desire",
-                "v": "on",
-                "vt": "str"
-            },
-            {
-                "p": "Finish",
-                "v": "off",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 1460,
-        "y": 580,
-        "wires": [
-            [
-                "2256af3ef7b06d5b"
-            ]
-        ]
-    },
-    {
-        "id": "2256af3ef7b06d5b",
-        "type": "change",
-        "z": "e94c6cf641652ce9",
-        "name": "SW 3",
-        "rules": [
-            {
-                "t": "set",
-                "p": "Device",
-                "pt": "msg",
-                "to": "Sonoff",
-                "tot": "flow"
-            },
-            {
-                "t": "set",
-                "p": "SwitchNum",
-                "pt": "msg",
-                "to": "3",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1650,
-        "y": 620,
-        "wires": [
-            [
-                "94080c0c5dabb50b"
-            ]
-        ]
-    },
-    {
-        "id": "b4cde0f04a9537eb",
-        "type": "subflow:f92a0611f953efce",
-        "z": "e94c6cf641652ce9",
-        "name": "",
-        "x": 2640,
-        "y": 400,
-        "wires": [
-            [
-                "3acefaf6c5da7311",
-                "fde7e323dd3e2a06"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "3acefaf6c5da7311",
-        "type": "link out",
-        "z": "e94c6cf641652ce9",
-        "name": "link out 66",
-        "mode": "link",
-        "links": [
-            "6e47459bd4b9f6db",
-            "916f96b72f118288"
-        ],
-        "x": 2755,
-        "y": 380,
-        "wires": [],
-        "icon": "node-red/alert.svg"
-    },
-    {
-        "id": "69e220c2127c5f82",
-        "type": "link out",
-        "z": "e94c6cf641652ce9",
-        "name": "link out 67",
-        "mode": "link",
-        "links": [
-            "ee01906c603bb7e3",
-            "4223a86c7d312548"
-        ],
-        "x": 2735,
-        "y": 500,
-        "wires": []
-    },
-    {
-        "id": "832af1d5922758f7",
-        "type": "change",
-        "z": "e94c6cf641652ce9",
-        "name": "filter",
-        "rules": [
-            {
-                "t": "move",
-                "p": "payload.data.configure",
-                "pt": "msg",
-                "to": "tmp.configure",
-                "tot": "msg"
-            },
-            {
-                "t": "move",
-                "p": "tmp",
-                "pt": "msg",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 2630,
-        "y": 500,
-        "wires": [
-            [
-                "69e220c2127c5f82"
-            ]
-        ]
-    },
-    {
-        "id": "fde7e323dd3e2a06",
-        "type": "subflow:ccab8793870fae40",
-        "z": "e94c6cf641652ce9",
-        "name": "",
-        "x": 2620,
-        "y": 460,
-        "wires": [
-            [
-                "2ca136ef970bf645"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "49d9580f6b7df76e",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Get State",
-        "props": [
-            {
-                "p": "Device",
-                "v": "Sonoff",
-                "vt": "flow"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 2240,
-        "y": 540,
-        "wires": [
-            [
-                "2a5c128012f86cfe"
-            ]
-        ]
-    },
-    {
-        "id": "8806ac388c401bf3",
-        "type": "change",
-        "z": "e94c6cf641652ce9",
-        "name": "SW 0",
-        "rules": [
-            {
-                "t": "set",
-                "p": "Device",
-                "pt": "msg",
-                "to": "Sonoff",
-                "tot": "flow"
-            },
-            {
-                "t": "set",
-                "p": "SwitchNum",
-                "pt": "msg",
-                "to": "0",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 2430,
-        "y": 100,
-        "wires": [
-            [
-                "7feb0b10ed55995f"
-            ]
-        ]
-    },
-    {
-        "id": "13e126edd98e7f1f",
-        "type": "change",
-        "z": "e94c6cf641652ce9",
-        "name": "SW 1",
-        "rules": [
-            {
-                "t": "set",
-                "p": "Device",
-                "pt": "msg",
-                "to": "Sonoff",
-                "tot": "flow"
-            },
-            {
-                "t": "set",
-                "p": "SwitchNum",
-                "pt": "msg",
-                "to": "1",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 2430,
-        "y": 220,
-        "wires": [
-            [
-                "7feb0b10ed55995f"
-            ]
-        ]
-    },
-    {
-        "id": "5e9e1a87515293d5",
-        "type": "change",
-        "z": "e94c6cf641652ce9",
-        "name": "SW 2",
-        "rules": [
-            {
-                "t": "set",
-                "p": "Device",
-                "pt": "msg",
-                "to": "Sonoff",
-                "tot": "flow"
-            },
-            {
-                "t": "set",
-                "p": "SwitchNum",
-                "pt": "msg",
-                "to": "2",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 2430,
-        "y": 340,
-        "wires": [
-            [
-                "7feb0b10ed55995f"
-            ]
-        ]
-    },
-    {
-        "id": "4d1cbb822a6c6e6f",
-        "type": "change",
-        "z": "e94c6cf641652ce9",
-        "name": "SW 3",
-        "rules": [
-            {
-                "t": "set",
-                "p": "Device",
-                "pt": "msg",
-                "to": "Sonoff",
-                "tot": "flow"
-            },
-            {
-                "t": "set",
-                "p": "SwitchNum",
-                "pt": "msg",
-                "to": "3",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 2430,
-        "y": 460,
-        "wires": [
-            [
-                "7feb0b10ed55995f"
-            ]
-        ]
-    },
-    {
-        "id": "2ca44c260a6e56c8",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Startup ON",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "on",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 2240,
-        "y": 60,
-        "wires": [
-            [
-                "8806ac388c401bf3"
-            ]
-        ]
-    },
-    {
-        "id": "c2254adffb0e362b",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Startup OFF",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "off",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 2250,
-        "y": 100,
-        "wires": [
-            [
-                "8806ac388c401bf3"
-            ]
-        ]
-    },
-    {
-        "id": "72a05856a750a584",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Startup STAY",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "stay",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 2250,
-        "y": 140,
-        "wires": [
-            [
-                "8806ac388c401bf3"
-            ]
-        ]
-    },
-    {
-        "id": "66d690683dc90833",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Startup ON",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "on",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 2260,
-        "y": 180,
-        "wires": [
-            [
-                "13e126edd98e7f1f"
-            ]
-        ]
-    },
-    {
-        "id": "ad2d63c08c793286",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Startup OFF",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "off",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 2270,
-        "y": 220,
-        "wires": [
-            [
-                "13e126edd98e7f1f"
-            ]
-        ]
-    },
-    {
-        "id": "b9dbe76c7b79a896",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Startup STAY",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "stay",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 2270,
-        "y": 260,
-        "wires": [
-            [
-                "13e126edd98e7f1f"
-            ]
-        ]
-    },
-    {
-        "id": "ae880f13c7ca9b8b",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Startup ON",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "on",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 2240,
-        "y": 300,
-        "wires": [
-            [
-                "5e9e1a87515293d5"
-            ]
-        ]
-    },
-    {
-        "id": "9d56603a2a8455d3",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Startup OFF",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "off",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 2250,
-        "y": 340,
-        "wires": [
-            [
-                "5e9e1a87515293d5"
-            ]
-        ]
-    },
-    {
-        "id": "c26540bf77cd8e3a",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Startup STAY",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "stay",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 2250,
-        "y": 380,
-        "wires": [
-            [
-                "5e9e1a87515293d5"
-            ]
-        ]
-    },
-    {
-        "id": "5839604d9360a160",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Startup ON",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "on",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 2260,
-        "y": 420,
-        "wires": [
-            [
-                "4d1cbb822a6c6e6f"
-            ]
-        ]
-    },
-    {
-        "id": "e0cb4d8a5e175315",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Startup OFF",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "off",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 2270,
-        "y": 460,
-        "wires": [
-            [
-                "4d1cbb822a6c6e6f"
-            ]
-        ]
-    },
-    {
-        "id": "45e16289f5be03d9",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Startup STAY",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "stay",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 2270,
-        "y": 500,
-        "wires": [
-            [
-                "4d1cbb822a6c6e6f"
-            ]
-        ]
-    },
-    {
-        "id": "6b250fc57ad249c0",
-        "type": "subflow:ccab8793870fae40",
-        "z": "e94c6cf641652ce9",
-        "name": "",
-        "x": 2640,
-        "y": 280,
-        "wires": [
-            [
-                "d08a455e180c4731"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "d08a455e180c4731",
-        "type": "function",
-        "z": "e94c6cf641652ce9",
-        "name": "function 26",
-        "func": "msg.topic = \"startups\";\n\nmsg.payload.data.configure[msg.SwitchNum].startup = msg.Desire;\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 2650,
-        "y": 320,
-        "wires": [
-            [
-                "777a34f1986b48ec"
-            ]
-        ]
-    },
-    {
-        "id": "47d7c10931c91f42",
-        "type": "function",
-        "z": "e94c6cf641652ce9",
-        "name": "Format",
-        "func": "msg.Formatted =\n\"Power-On States\\n\" +\n\"0: \" + msg.payload.data.configure[0].startup + \"\\n\" +\n\"1: \" + msg.payload.data.configure[1].startup + \"\\n\" +\n\"2: \" + msg.payload.data.configure[2].startup + \"\\n\" +\n\"3: \" + msg.payload.data.configure[3].startup;\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 2620,
-        "y": 540,
-        "wires": [
-            [
-                "59d42bb80062a5aa"
-            ]
-        ]
-    },
-    {
-        "id": "777a34f1986b48ec",
-        "type": "change",
-        "z": "e94c6cf641652ce9",
-        "name": "select",
-        "rules": [
-            {
-                "t": "set",
                 "p": "topic",
-                "pt": "msg",
-                "to": "startups",
-                "tot": "str"
-            },
-            {
-                "t": "move",
-                "p": "payload.data.configure",
-                "pt": "msg",
-                "to": "tmp.configure",
-                "tot": "msg"
-            },
-            {
-                "t": "move",
-                "p": "tmp",
-                "pt": "msg",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 2650,
-        "y": 360,
-        "wires": [
-            [
-                "b4cde0f04a9537eb"
-            ]
-        ]
-    },
-    {
-        "id": "6d1e0ea0d59017db",
-        "type": "change",
-        "z": "e94c6cf641652ce9",
-        "name": "SW 0",
-        "rules": [
-            {
-                "t": "set",
-                "p": "Device",
-                "pt": "msg",
-                "to": "Sonoff",
-                "tot": "flow"
-            },
-            {
-                "t": "set",
-                "p": "SwitchNum",
-                "pt": "msg",
-                "to": "0",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 830,
-        "y": 100,
-        "wires": [
-            [
-                "498a7286fc78319f"
-            ]
-        ]
-    },
-    {
-        "id": "733069579f083039",
-        "type": "change",
-        "z": "e94c6cf641652ce9",
-        "name": "SW 1",
-        "rules": [
-            {
-                "t": "set",
-                "p": "Device",
-                "pt": "msg",
-                "to": "Sonoff",
-                "tot": "flow"
-            },
-            {
-                "t": "set",
-                "p": "SwitchNum",
-                "pt": "msg",
-                "to": "1",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 830,
-        "y": 220,
-        "wires": [
-            [
-                "498a7286fc78319f"
-            ]
-        ]
-    },
-    {
-        "id": "677f49e650c4acea",
-        "type": "change",
-        "z": "e94c6cf641652ce9",
-        "name": "SW 2",
-        "rules": [
-            {
-                "t": "set",
-                "p": "Device",
-                "pt": "msg",
-                "to": "Sonoff",
-                "tot": "flow"
-            },
-            {
-                "t": "set",
-                "p": "SwitchNum",
-                "pt": "msg",
-                "to": "2",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 830,
-        "y": 340,
-        "wires": [
-            [
-                "498a7286fc78319f"
-            ]
-        ]
-    },
-    {
-        "id": "c951efcf3ddfa4b2",
-        "type": "change",
-        "z": "e94c6cf641652ce9",
-        "name": "SW 3",
-        "rules": [
-            {
-                "t": "set",
-                "p": "Device",
-                "pt": "msg",
-                "to": "Sonoff",
-                "tot": "flow"
-            },
-            {
-                "t": "set",
-                "p": "SwitchNum",
-                "pt": "msg",
-                "to": "3",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 830,
-        "y": 460,
-        "wires": [
-            [
-                "498a7286fc78319f"
-            ]
-        ]
-    },
-    {
-        "id": "5bef555c62a5b926",
-        "type": "debug",
-        "z": "e94c6cf641652ce9",
-        "name": "debug 91",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload.data",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 420,
-        "y": 340,
-        "wires": []
-    },
-    {
-        "id": "b6f61e1c9c2448a9",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Toggle",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "toggle",
                 "vt": "str"
             }
         ],
@@ -3238,792 +1547,42 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "topic": "",
-        "x": 607,
-        "y": 60,
-        "wires": [
-            [
-                "6d1e0ea0d59017db"
-            ]
-        ]
-    },
-    {
-        "id": "1ac5dca8035bc2ee",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Toggle",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "toggle",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 630,
-        "y": 180,
-        "wires": [
-            [
-                "733069579f083039"
-            ]
-        ]
-    },
-    {
-        "id": "2c17690db44890f0",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Toggle",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "toggle",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 610,
-        "y": 300,
-        "wires": [
-            [
-                "677f49e650c4acea"
-            ]
-        ]
-    },
-    {
-        "id": "5f56916adb450cdd",
-        "type": "inject",
-        "z": "e94c6cf641652ce9",
-        "name": "Toggle",
-        "props": [
-            {
-                "p": "Desire",
-                "v": "toggle",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 630,
-        "y": 420,
-        "wires": [
-            [
-                "c951efcf3ddfa4b2"
-            ]
-        ]
-    },
-    {
-        "id": "498a7286fc78319f",
-        "type": "switch",
-        "z": "e94c6cf641652ce9",
-        "name": "",
-        "property": "Desire",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "toggle",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "on",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "off",
-                "vt": "str"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 4,
-        "x": 850,
-        "y": 280,
-        "wires": [
-            [
-                "cc1f252aa1f92fbd"
-            ],
-            [
-                "296513e0bbfb06fd"
-            ],
-            [
-                "296513e0bbfb06fd"
-            ],
-            [
-                "252c50ddd716a6d0"
-            ]
-        ]
-    },
-    {
-        "id": "252c50ddd716a6d0",
-        "type": "change",
-        "z": "e94c6cf641652ce9",
-        "name": "wtAf?",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload.deviceid",
-                "pt": "msg",
-                "to": "Sonoff.sonoffID",
-                "tot": "flow"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1030,
-        "y": 400,
-        "wires": [
-            [
-                "324d33914b484438"
-            ]
-        ]
-    },
-    {
-        "id": "324d33914b484438",
-        "type": "link out",
-        "z": "e94c6cf641652ce9",
-        "name": "link out 68",
-        "mode": "link",
-        "links": [
-            "6e47459bd4b9f6db",
-            "916f96b72f118288"
-        ],
-        "x": 1145,
-        "y": 400,
-        "wires": [],
-        "icon": "node-red/alert.svg"
-    },
-    {
-        "id": "89636d2f04f4d315",
-        "type": "change",
-        "z": "e94c6cf641652ce9",
-        "name": "toggle",
-        "rules": [
-            {
-                "t": "move",
-                "p": "payload.data.switches[msg.SwitchNum].switch",
-                "pt": "msg",
-                "to": "TOGGLE",
-                "tot": "msg"
-            },
-            {
-                "t": "change",
-                "p": "TOGGLE",
-                "pt": "msg",
-                "from": "on",
-                "fromt": "str",
-                "to": "0ff",
-                "tot": "str"
-            },
-            {
-                "t": "change",
-                "p": "TOGGLE",
-                "pt": "msg",
-                "from": "off",
-                "fromt": "str",
-                "to": "0n",
-                "tot": "str"
-            },
-            {
-                "t": "change",
-                "p": "TOGGLE",
-                "pt": "msg",
-                "from": "0n",
-                "fromt": "str",
-                "to": "on",
-                "tot": "str"
-            },
-            {
-                "t": "change",
-                "p": "TOGGLE",
-                "pt": "msg",
-                "from": "0ff",
-                "fromt": "str",
-                "to": "off",
-                "tot": "str"
-            },
-            {
-                "t": "move",
-                "p": "TOGGLE",
-                "pt": "msg",
-                "to": "payload.data.switches[msg.SwitchNum].switch",
-                "tot": "msg"
-            },
-            {
-                "t": "move",
-                "p": "payload.data.switches",
-                "pt": "msg",
-                "to": "tmp.switches",
-                "tot": "msg"
-            },
-            {
-                "t": "move",
-                "p": "tmp",
-                "pt": "msg",
-                "to": "payload",
-                "tot": "msg"
-            },
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "switches",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1030,
-        "y": 200,
-        "wires": [
-            [
-                "523f5a8f62ac33bd"
-            ]
-        ]
-    },
-    {
-        "id": "cc1f252aa1f92fbd",
-        "type": "subflow:ccab8793870fae40",
-        "z": "e94c6cf641652ce9",
-        "name": "",
-        "x": 1020,
-        "y": 160,
-        "wires": [
-            [
-                "89636d2f04f4d315"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "e8e6b62a5580cb01",
-        "type": "debug",
-        "z": "e94c6cf641652ce9",
-        "name": "formatted",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "Formatted",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 400,
-        "y": 200,
-        "wires": []
-    },
-    {
-        "id": "349983e1162eb202",
-        "type": "link out",
-        "z": "e94c6cf641652ce9",
-        "name": "link out 69",
-        "mode": "link",
-        "links": [
-            "7e18b48d4f0f30e3"
-        ],
-        "x": 1145,
-        "y": 540,
-        "wires": [],
-        "icon": "node-red/envelope.svg"
-    },
-    {
-        "id": "7e18b48d4f0f30e3",
-        "type": "link in",
-        "z": "e94c6cf641652ce9",
-        "name": "link in 13",
-        "links": [
-            "349983e1162eb202",
-            "6adb5c1c471e72b9",
-            "59d42bb80062a5aa"
-        ],
-        "x": 305,
-        "y": 200,
-        "wires": [
-            [
-                "e8e6b62a5580cb01"
-            ]
-        ],
-        "icon": "node-red/envelope.svg"
-    },
-    {
-        "id": "6adb5c1c471e72b9",
-        "type": "link out",
-        "z": "e94c6cf641652ce9",
-        "name": "link out 70",
-        "mode": "link",
-        "links": [
-            "7e18b48d4f0f30e3"
-        ],
-        "x": 2035,
-        "y": 720,
-        "wires": [],
-        "icon": "node-red/envelope.svg"
-    },
-    {
-        "id": "59d42bb80062a5aa",
-        "type": "link out",
-        "z": "e94c6cf641652ce9",
-        "name": "link out 71",
-        "mode": "link",
-        "links": [
-            "7e18b48d4f0f30e3"
-        ],
-        "x": 2735,
-        "y": 540,
-        "wires": [],
-        "icon": "node-red/envelope.svg"
-    },
-    {
-        "id": "f61bdb9c80eb8464",
-        "type": "function",
-        "z": "e94c6cf641652ce9",
-        "name": "function 27",
-        "func": "\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 870,
-        "y": 640,
-        "wires": [
-            [
-                "47eb1db432589b2f"
-            ]
-        ]
-    },
-    {
-        "id": "e9fbe606322465cd",
-        "type": "mqtt in",
-        "z": "e94c6cf641652ce9",
-        "name": "",
-        "topic": "MiniR3_DIY/cmnd/switch",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "9720ab7f.af5cc8",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 670,
-        "y": 640,
-        "wires": [
-            [
-                "f61bdb9c80eb8464"
-            ]
-        ]
-    },
-    {
-        "id": "e5300e10e49f0d28",
-        "type": "mqtt out",
-        "z": "e94c6cf641652ce9",
-        "name": "",
-        "topic": "MiniR3_DIY/stat",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "9720ab7f.af5cc8",
-        "x": 1040,
-        "y": 800,
-        "wires": []
-    },
-    {
-        "id": "4223a86c7d312548",
-        "type": "link in",
-        "z": "e94c6cf641652ce9",
-        "name": "link in 15",
-        "links": [
-            "1ee9886d5fc189d8",
-            "9a10a6d8970ea4f5",
-            "4e5c677a80125d88",
-            "c5245953f3cc6154",
-            "d45cf6194764da2f",
-            "0cc5b2c9616405cc",
-            "747910efe3b6f4b3",
-            "fc9fcb20fe57dfe7",
-            "455cf4d9e13a72c6",
-            "f8009480b924e7a4",
-            "69e220c2127c5f82",
-            "2cea97aff62d6b13"
-        ],
-        "x": 765,
-        "y": 800,
-        "wires": [
-            [
-                "3585041f5f8f7629"
-            ]
-        ]
-    },
-    {
-        "id": "3585041f5f8f7629",
-        "type": "function",
-        "z": "e94c6cf641652ce9",
-        "name": "function 28",
-        "func": "\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 870,
-        "y": 800,
-        "wires": [
-            [
-                "e5300e10e49f0d28"
-            ]
-        ]
-    },
-    {
-        "id": "e0f03466d9158608",
-        "type": "function",
-        "z": "e94c6cf641652ce9",
-        "name": "function 29",
-        "func": "\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 870,
-        "y": 680,
-        "wires": [
-            [
-                "40dd87f275706133"
-            ]
-        ]
-    },
-    {
-        "id": "a212d4fa4d546adf",
-        "type": "mqtt in",
-        "z": "e94c6cf641652ce9",
-        "name": "",
-        "topic": "MiniR3_DIY/cmnd/inch",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "9720ab7f.af5cc8",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 660,
-        "y": 680,
-        "wires": [
-            [
-                "e0f03466d9158608"
-            ]
-        ]
-    },
-    {
-        "id": "583d045ea49c9062",
-        "type": "function",
-        "z": "e94c6cf641652ce9",
-        "name": "function 30",
-        "func": "\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 870,
-        "y": 720,
-        "wires": [
-            [
-                "75c70494f49a6702"
-            ]
-        ]
-    },
-    {
-        "id": "5cb02b39bff0fe20",
-        "type": "mqtt in",
-        "z": "e94c6cf641652ce9",
-        "name": "",
-        "topic": "MiniR3_DIY/cmnd/pos",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "9720ab7f.af5cc8",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 660,
-        "y": 720,
-        "wires": [
-            [
-                "583d045ea49c9062"
-            ]
-        ]
-    },
-    {
-        "id": "9ce5e799af9a6660",
-        "type": "function",
-        "z": "e94c6cf641652ce9",
-        "name": "function 31",
-        "func": "\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 870,
+        "topic": "MiniR2_DIY",
+        "payload": "{\"Function\":\"OTA\",\"Action\":\"status\"}",
+        "payloadType": "json",
+        "x": 730,
         "y": 760,
         "wires": [
             [
-                "325b4b4281eac6c8"
+                "38422e67d4d71504"
             ]
         ]
     },
     {
-        "id": "f92fc0a11d17c86f",
-        "type": "mqtt in",
-        "z": "e94c6cf641652ce9",
-        "name": "",
-        "topic": "MiniR3_DIY/cmnd/info",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "9720ab7f.af5cc8",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 660,
-        "y": 760,
-        "wires": [
-            [
-                "9ce5e799af9a6660"
-            ]
-        ]
-    },
-    {
-        "id": "43fb933a211e6c1b",
-        "type": "mqtt out",
-        "z": "e94c6cf641652ce9",
-        "name": "",
-        "topic": "MiniR3_DIY/response",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "9720ab7f.af5cc8",
-        "x": 1060,
-        "y": 840,
-        "wires": []
-    },
-    {
-        "id": "4c3a93228367300a",
-        "type": "function",
-        "z": "e94c6cf641652ce9",
-        "name": "function 32",
-        "func": "\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 870,
-        "y": 840,
-        "wires": [
-            [
-                "43fb933a211e6c1b"
-            ]
-        ]
-    },
-    {
-        "id": "916f96b72f118288",
-        "type": "link in",
-        "z": "e94c6cf641652ce9",
-        "name": "link in 16",
-        "links": [
-            "fa0492cd5381f83d",
-            "ff0e14c2ae635fff",
-            "6c89d9a215ad21e1",
-            "37ab1cada8541705",
-            "48aebd7875eb7c0f",
-            "849034361f2c6fcb",
-            "3acefaf6c5da7311",
-            "324d33914b484438"
-        ],
-        "x": 765,
-        "y": 840,
-        "wires": [
-            [
-                "4c3a93228367300a"
-            ]
-        ],
-        "icon": "node-red/alert.svg"
-    },
-    {
-        "id": "47eb1db432589b2f",
-        "type": "link out",
-        "z": "e94c6cf641652ce9",
-        "name": "link out 77",
-        "mode": "link",
-        "links": [
-            "81f2dbd7caf08317"
-        ],
-        "x": 975,
-        "y": 640,
-        "wires": []
-    },
-    {
-        "id": "81f2dbd7caf08317",
-        "type": "link in",
-        "z": "e94c6cf641652ce9",
-        "name": "link in 17",
-        "links": [
-            "47eb1db432589b2f"
-        ],
-        "x": 745,
-        "y": 280,
-        "wires": [
-            [
-                "498a7286fc78319f"
-            ]
-        ]
-    },
-    {
-        "id": "40dd87f275706133",
-        "type": "link out",
-        "z": "e94c6cf641652ce9",
-        "name": "link out 78",
-        "mode": "link",
-        "links": [
-            "7566d8b735d7831d"
-        ],
-        "x": 975,
-        "y": 680,
-        "wires": []
-    },
-    {
-        "id": "7566d8b735d7831d",
-        "type": "link in",
-        "z": "e94c6cf641652ce9",
-        "name": "link in 18",
-        "links": [
-            "40dd87f275706133"
-        ],
-        "x": 1735,
-        "y": 360,
-        "wires": [
-            [
-                "94080c0c5dabb50b"
-            ]
-        ]
-    },
-    {
-        "id": "75c70494f49a6702",
-        "type": "link out",
-        "z": "e94c6cf641652ce9",
-        "name": "link out 79",
-        "mode": "link",
-        "links": [
-            "9908fef7e952a224"
-        ],
-        "x": 975,
-        "y": 720,
-        "wires": []
-    },
-    {
-        "id": "9908fef7e952a224",
-        "type": "link in",
-        "z": "e94c6cf641652ce9",
-        "name": "link in 19",
-        "links": [
-            "75c70494f49a6702"
-        ],
-        "x": 2475,
-        "y": 280,
-        "wires": [
-            [
-                "7feb0b10ed55995f"
-            ]
-        ]
-    },
-    {
-        "id": "325b4b4281eac6c8",
-        "type": "link out",
-        "z": "e94c6cf641652ce9",
-        "name": "link out 80",
-        "mode": "link",
-        "links": [
-            "3c70f1e4b9964cb7"
-        ],
-        "x": 975,
-        "y": 760,
-        "wires": []
-    },
-    {
-        "id": "3c70f1e4b9964cb7",
-        "type": "link in",
-        "z": "e94c6cf641652ce9",
-        "name": "link in 20",
-        "links": [
-            "325b4b4281eac6c8"
-        ],
-        "x": 145,
-        "y": 340,
-        "wires": [
-            [
-                "798c542f70f4b2f3"
-            ]
-        ]
-    },
-    {
-        "id": "6bfe0760ea454734",
-        "type": "comment",
-        "z": "e94c6cf641652ce9",
-        "name": "MQTT",
-        "info": "",
-        "x": 610,
-        "y": 600,
-        "wires": []
-    },
-    {
-        "id": "9720ab7f.af5cc8",
+        "id": "b8f3330d4af5f7f3",
         "type": "mqtt-broker",
-        "name": "SkyNet",
-        "broker": "skynet.tinkernet.ca",
+        "name": "",
+        "broker": "localhost",
         "port": "1883",
         "clientid": "",
+        "autoConnect": true,
         "usetls": false,
-        "compatmode": false,
+        "protocolVersion": "4",
         "keepalive": "60",
         "cleansession": true,
         "birthTopic": "",
         "birthQos": "0",
         "birthPayload": "",
+        "birthMsg": {},
         "closeTopic": "",
         "closeQos": "0",
         "closePayload": "",
+        "closeMsg": {},
         "willTopic": "",
         "willQos": "0",
-        "willPayload": ""
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
     }
 ]
