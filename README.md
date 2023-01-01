@@ -7,6 +7,10 @@ Sorta...
 
 ATM, this is in the very early stages & consists of flows and subflows to test the idea.
 
+**NOTICE!!! The [SONOFF DIY MODE API PROTOCOL](https://sonoff.tech/diy-developer/#7) documentation supplied by iTead contains errors.**
+
+One error that'll cause particular stress is that the example output provided is NOT actual output.  For example, the "Get Device Info" output bears little resemblance to what the device returns.  It does NOT return its __deviceid__ and the up to date __fwVersion__ is 1.4.1
+
 ## Subflows:
 ### Sonoff1
 This subflow sends _RESTful API_ requests to the device.
