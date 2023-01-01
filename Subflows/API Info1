@@ -1,0 +1,152 @@
+[
+    {
+        "id": "36507ce6223c59e4",
+        "type": "subflow",
+        "name": "API Info1",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "d411f6c7856a302f"
+                    },
+                    {
+                        "id": "40a2748354e429d2"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 720,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "d5cdef88e730cc88",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 720,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "c4402025e11586ae",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "c4402025e11586ae",
+        "type": "junction",
+        "z": "36507ce6223c59e4",
+        "x": 260,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0226e8f0a80d49d3",
+        "type": "http request",
+        "z": "36507ce6223c59e4",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "basic",
+        "senderr": false,
+        "headers": [],
+        "x": 330,
+        "y": 80,
+        "wires": [
+            [
+                "d5cdef88e730cc88"
+            ]
+        ]
+    },
+    {
+        "id": "d411f6c7856a302f",
+        "type": "function",
+        "z": "36507ce6223c59e4",
+        "name": "url",
+        "func": "// var DN = msg.payload.Device.Device;\n// var IP = msg.payload.Device.IP;\n// var ID = msg.payload.Device.ID;\n\n// msg.url = \"http://\" + IP + \":8081/zeroconf/info\";\n\n// msg.payload = {\n//     \"deviceid\": ID,\n//     \"data\": msg.payload\n//     };\n    \n// return msg;\n\n\n\nvar DEVICE = msg.payload.Device;\n\nvar Topic = \"info\";\n\nmsg.url = \"http://\" + msg.payload.Device.IP + \":8081/zeroconf/\" + Topic;\n\nmsg.payload = {\n    \"deviceid\": msg.payload.Device.ID,\n    \"data\": msg.payload,\n    \"Device\": msg.payload.Device\n    };\n    \nmsg.payload.data = \"\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 190,
+        "y": 80,
+        "wires": [
+            [
+                "0226e8f0a80d49d3",
+                "c4402025e11586ae"
+            ]
+        ]
+    },
+    {
+        "id": "40a2748354e429d2",
+        "type": "change",
+        "z": "36507ce6223c59e4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "Device",
+                "pt": "flow",
+                "to": "payload.Device",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 220,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d5cdef88e730cc88",
+        "type": "change",
+        "z": "36507ce6223c59e4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.Device",
+                "pt": "msg",
+                "to": "Device",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    }
+]
