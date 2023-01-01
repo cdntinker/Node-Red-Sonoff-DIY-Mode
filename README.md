@@ -12,25 +12,31 @@ ATM, this is in the very early stages & consists of flows and subflows to test t
 One error that'll cause particular stress is that the example output provided is NOT actual output.  For example, the "Get Device Info" output bears little resemblance to what the device returns.  It does NOT return its __deviceid__ and the up to date __fwVersion__ is 1.4.1
 
 ## Subflows:
-### Sonoff1
-This subflow sends _RESTful API_ requests to the device.
-### Sonoff2
-This subflow actually uses __Sonoff1__ to retrieve the device info from the device.
+### Sonoff0
+This subflow builds the _RESTful API_ requests to send to the device.
+
+It also formats the responses.
+
+### API Call
+This subflow sends the _RESTful API_ commands to the device.
+
+### API Info1
+This subflow sends the _RESTful API_ command to retrieve the device info from the device.
 
 ## Flows:
-### MiniR2 DIY Mode
+### DIY Mode MiniR2
 For talking to the [Sonoff MiniR2](https://itead.cc/product/sonoff-mini/) DIY Switch.
-### MiniR3 DIY Mode
+### DIY Mode MiniR3
 For talking to the [Sonoff MiniR3](https://itead.cc/product/sonoff-minir3-smart-switch/) DIY Switch. (Which is mostly unrelated to the MiniR2 DIY Switch... :confounded: )
-### BasicR3 DIY Mode
+### DIY Mode BasicR3
 (future item)
 Should be same as MiniR2
-### RFR3 DIY Mode
+### DIY Mode RFR3
 (future item)
 Should be same as MiniR2
-### D1 DIY Mode
+### DIY Mode D1
 (future item)
-### B05-BL DIY Mode
+### DIY Mode B05-BL
 (future item)
-### SPM-Main DIY Mode
+### DIY Mode SPM-Main
 (future item)
